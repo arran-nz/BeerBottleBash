@@ -142,8 +142,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.8759999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 813476500}
-  m_RootOrder: 0
+  m_Father: {fileID: 81719059}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &11123375
 ParticleSystemRenderer:
@@ -5327,14 +5327,10 @@ GameObject:
   m_Component:
   - component: {fileID: 81719059}
   - component: {fileID: 81719062}
-  - component: {fileID: 81719065}
-  - component: {fileID: 81719067}
   - component: {fileID: 81719064}
-  - component: {fileID: 81719068}
   - component: {fileID: 81719060}
   - component: {fileID: 81719061}
   - component: {fileID: 81719063}
-  - component: {fileID: 81719066}
   m_Layer: 0
   m_Name: Bottle_OBJ
   m_TagString: Untagged
@@ -5353,7 +5349,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1154680993}
-  - {fileID: 813476500}
+  - {fileID: 11123374}
   - {fileID: 1632779794}
   - {fileID: 1576422660}
   m_Father: {fileID: 0}
@@ -5394,11 +5390,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 81719058}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6ab2ec058128b44ea1b56909a33c548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boostParticle: {fileID: 11123377}
+  MaxUprightPitch: 45
 --- !u!54 &81719063
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5427,70 +5425,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RaycastOrigin: {fileID: 1632779794}
   RayDistance: 0.25
-  UprightMaxAngle: 45
   GroundLayer:
     serializedVersion: 2
     m_Bits: 256
-  Touching: 0
-  Upright: 0
---- !u!114 &81719065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81719058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12a7ba2a7d44fe44fa64b15d0098881c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxGroundVelocity: 20
-  MaxAirVelocity: 45
-  GroundAcceleration: 60
-  JumpHeight: 5
-  TurningSpeed: 200
---- !u!114 &81719066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81719058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c8ef3234ae7ebc46864aff28e93d16b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MovementDirection: {x: 0, y: 0, z: 0}
-  LookDirection: {x: 0, y: 0, z: 0}
-  JumpPressed: 0
-  BoostPressed: 0
-  FlipPressed: 0
---- !u!114 &81719067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81719058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651d7ab6af637794f97a863fdb1e28d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxAirVelocity: 30
-  AirAcceleration: 10
---- !u!114 &81719068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 81719058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd1df09324a6224f838eb6b40b74400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BoostAccerleration: 50
-  BoostEffect: {fileID: 11123377}
 --- !u!1 &91094805
 GameObject:
   m_ObjectHideFlags: 0
@@ -5669,6 +5606,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 102081829}
+  - component: {fileID: 102081828}
   m_Layer: 0
   m_Name: __PlayerInput__
   m_TagString: Untagged
@@ -5676,6 +5614,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &102081828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 102081827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c8ef3234ae7ebc46864aff28e93d16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementDirection: {x: 0, y: 0, z: 0}
+  LookDirection: {x: 0, y: 0, z: 0}
+  JumpPressed: 0
+  BoostPressed: 0
+  FlipPressed: 0
 --- !u!4 &102081829
 Transform:
   m_ObjectHideFlags: 0
@@ -5868,10 +5822,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 936730f53894d794596ae5e007cf59e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 0}
+  input: {fileID: 102081828}
   followMagnitude: 30
   rotationMagnitude: 30
-  player: {fileID: 81719059}
+  player: {fileID: 81719062}
   camOffset: {x: 0, y: 2.14, z: -4.73}
   rotOffset: {x: -16.32, y: 0, z: 0}
 --- !u!114 &119995785
@@ -9564,35 +9518,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749347941}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &813476499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 813476500}
-  m_Layer: 0
-  m_Name: Emittors
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &813476500
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 813476499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 11123374}
-  m_Father: {fileID: 81719059}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &853055250
 GameObject:
   m_ObjectHideFlags: 0

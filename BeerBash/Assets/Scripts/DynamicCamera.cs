@@ -9,7 +9,7 @@ public class DynamicCamera : MonoBehaviour
     public float followMagnitude = 30f;
     public float rotationMagnitude = 10f;
 
-    public Transform player = null;
+    public PlayerObjectController player = null;
 
     public Vector3 camOffset;
     public Vector3 rotOffset;
@@ -29,12 +29,12 @@ public class DynamicCamera : MonoBehaviour
     {
         Vector3 newPos = transform.position;
 
-        if(player.GetComponent<RaycastController>().Upright)
+        if(player.Upright)
         {
-            lastQ = Quaternion.LookRotation(player.forward, transform.up);
+            lastQ = Quaternion.LookRotation(player.transform.forward, transform.up);
         }
 
-        newPos = lastQ * camOffset + player.position;
+        newPos = lastQ * camOffset + player.transform.position;
 
         float dist = Vector3.Distance(newPos, transform.position);
         dist = Mathf.Max(1, dist);
@@ -48,10 +48,10 @@ public class DynamicCamera : MonoBehaviour
 
 
         Vector3 playerVel = player.gameObject.GetComponent<Rigidbody>().velocity;
-        playerVel = Vector3.ClampMagnitude(playerVel, .2f);
+        playerVel = Vector3.ClampMagnitude(playerVel, .5f);
 
         Quaternion rotationOffset = Quaternion.Euler(rotOffset);
-        Vector3 relativePos = (player.position - transform.position) + playerVel;
+        Vector3 relativePos = (player.transform.position - transform.position) + playerVel;
         Quaternion lookDir = Quaternion.LookRotation(relativePos, Vector3.up);
         Quaternion finalRot = lookDir * rotationOffset;
 
