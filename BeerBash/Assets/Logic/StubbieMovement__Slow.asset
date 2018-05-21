@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb28c4b4c588b314a83d67956277eb02, type: 3}
+  m_Name: StubbieMovement__Slow
+  m_EditorClassIdentifier: 
+  BoostAcceleration: 50
+  JumpHeight: 5
+  MaxAirVelocity: 20
+  AirAcceleration: 10
+  YawSpeed: 300
+  RollSpeed: 350
+  PitchSpeed: 350
+  AirMaxAngularVelocity: 5.5
+  AirAngularDampening: 4
+  MaxUprightVelocity: 20
+  UprightAcceleration: 60
+  TurningSpeed: 200
+  UprightMaxAngularVelocity: 2
+  UprightAngularDampening: 6

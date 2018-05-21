@@ -41,7 +41,7 @@ public class DynamicCamera : MonoBehaviour
         float t = (Time.fixedDeltaTime / dist) * followMagnitude;
 
 
-        Vector3 lerpPos = Vector3.Lerp(transform.position, newPos, t);        
+        Vector3 lerpPos = Vector3.Lerp(transform.position, newPos, Time.fixedDeltaTime * followMagnitude);        
         cam.position =  lerpPos;
 
 

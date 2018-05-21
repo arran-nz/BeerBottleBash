@@ -15,9 +15,9 @@ namespace Bottle.MovementTypes
             this.settings = settings;
         }
 
-        public void ApplyJump(Rigidbody rb)
+        public void ApplyJump(Rigidbody rb, Vector3 jumpDir)
         {
-            Vector3 force = GetJump(Vector3.up);
+            Vector3 force = GetJump(jumpDir);
             rb.AddForce(force, ForceMode.VelocityChange);
         }
 

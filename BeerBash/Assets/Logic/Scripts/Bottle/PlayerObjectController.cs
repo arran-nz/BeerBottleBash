@@ -49,26 +49,30 @@ public class PlayerObjectController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        SurfaceInfo surfaceInfo = raycaster.GetSurfaceInfo();
-        //Grounded = surfaceInfo.IsGround;
-        Upright = surfaceInfo.Pitch <= maxUprightPitch;
+        SurfaceInfo surfaceInfo = raycaster.GetSurfaceInfo(GetComponent<CapsuleCollider>());
+
+        Upright = surfaceInfo.Pitch <= maxUprightPitch && surfaceInfo.RaycastOriginResult;
+        Grounded = surfaceInfo.Pitch <= maxUprightPitch && !surfaceInfo.RaycastOriginResult;
 
         Movement(Upright, surfaceInfo);
 
-        InputJump(Upright);
+        InputJump(Grounded || Upright);
 
         InputBoost();
 
-	}
+
+    }
 
     void Movement(bool Upright, SurfaceInfo surfaceInfo)
     {
         if (Upright)
         {
+            rb.freezeRotation = true;
             uprightMovement.ApplyMovementForces(rb, input, surfaceInfo);
         }
         else
         {
+            rb.freezeRotation = false;
             airMovement.ApplyMovementForces(rb, input);
         }
     }
@@ -77,7 +81,8 @@ public class PlayerObjectController : MonoBehaviour {
     {
         if (canJump && input.JumpPressed)
         {
-            jump.ApplyJump(rb);
+
+            jump.ApplyJump(rb, Vector3.up);
         }
     }
 

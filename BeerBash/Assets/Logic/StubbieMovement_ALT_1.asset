@@ -9,17 +9,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb28c4b4c588b314a83d67956277eb02, type: 3}
-  m_Name: StubbieMovement1
+  m_Name: StubbieMovement_ALT_1
   m_EditorClassIdentifier: 
-  BoostAcceleration: 50
+  BoostAcceleration: 60
   JumpHeight: 5
-  MaxAirVelocity: 30
-  AirAcceleration: 10
+  MaxAirVelocity: 28
+  AirAcceleration: 0
   YawSpeed: 300
-  RollSpeed: 350
-  PitchSpeed: 350
-  AirMaxAngularVelocity: 5.5
-  AirAngularDampening: 4
+  RollSpeed: 300
+  PitchSpeed: 450
+  AirMaxAngularVelocity: 6
+  AirAngularDampening: 5
   MaxUprightVelocity: 20
   UprightAcceleration: 60
   TurningSpeed: 200
