@@ -6,13 +6,20 @@ namespace Bottle.MovementTypes
 {
     public class Boost
     {
-        const float BoostAccerleration = 50f;
+        readonly BottleMovementConfiguration settings;
+
+        float BoostAcceleration => settings.BoostAcceleration;
+
+        public Boost(BottleMovementConfiguration settings)
+        {
+            this.settings = settings;
+        }
 
         // Update is called once per frame
         public void ApplyBoost(Rigidbody rb)
         {
             Vector3 boostDirection = rb.transform.up * -1;
-            Vector3 force = boostDirection * BoostAccerleration;
+            Vector3 force = boostDirection * BoostAcceleration;
 
             rb.AddForce(force, ForceMode.Acceleration);
         }

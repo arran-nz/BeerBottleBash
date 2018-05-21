@@ -6,18 +6,24 @@ namespace Bottle.MovementTypes
 {
     public class UprightMovement
     {
+        readonly BottleMovementConfiguration settings;
 
-        const float MaxGroundVelocity = 20f;
-        const float GroundAcceleration = 60f;
+        float MaxUprightVelocity => settings.MaxUprightVelocity;
+        float UprightAcceleration => settings.UprightAcceleration;
 
-        const float TurningSpeed = 200f;
+        float TurningSpeed => settings.TurningSpeed;
 
-        const float MaxAngularVelocity = 2f;
-        const float AngularDampening = 6f;
+        float MaxAngularVelocity => settings.UprightMaxAngularVelocity;
+        float AngularDampening => settings.UprightAngularDampening;
+
+        public UprightMovement(BottleMovementConfiguration settings)
+        {
+            this.settings = settings;
+        }
 
         public void ApplyMovementForces(Rigidbody rb, InputController input, SurfaceInfo surfaceInfo)
         {
-            rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxGroundVelocity);
+            rb.velocity = Vector3.ClampMagnitude(rb.velocity, MaxUprightVelocity);
 
             rb.maxAngularVelocity = MaxAngularVelocity;
             rb.angularVelocity = Vector3.Slerp(rb.angularVelocity, Vector3.zero, Time.fixedDeltaTime * AngularDampening);
@@ -50,7 +56,7 @@ namespace Bottle.MovementTypes
                 = AngledVectorFromSurfaceNormal(uprightDirection, moveDir);
 
             // Multiply by force
-            Vector3 force = adjustedMovement * GroundAcceleration;
+            Vector3 force = adjustedMovement * UprightAcceleration;
 
             Debug.DrawRay(rb.position, adjustedMovement, Color.red);
 

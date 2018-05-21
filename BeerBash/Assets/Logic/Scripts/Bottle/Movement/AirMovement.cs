@@ -7,16 +7,22 @@ namespace Bottle.MovementTypes
 
     public class AirMovement
     {
+        readonly BottleMovementConfiguration settings;
 
-        const float MaxAirVelocity = 30f;
-        const float AirAcceleration = 10f;
+        float MaxAirVelocity => settings.MaxAirVelocity;
+        float AirAcceleration => settings.AirAcceleration;
 
-        const float YawSpeed = 300f;
-        const float RollSpeed = 350f;
-        const float PitchSpeed = 350f;
+        float YawSpeed => settings.YawSpeed;
+        float RollSpeed => settings.RollSpeed;
+        float PitchSpeed => settings.PitchSpeed;
 
-        const float MaxAngularVelocity = 5.5f;
-        const float AngularDampening = 4f;
+        float MaxAngularVelocity => settings.AirMaxAngularVelocity;
+        float AngularDampening => settings.AirAngularDampening;
+
+        public AirMovement(BottleMovementConfiguration settings)
+        {
+            this.settings = settings;
+        }
 
         public void ApplyMovementForces(Rigidbody rb, InputController input)
         {

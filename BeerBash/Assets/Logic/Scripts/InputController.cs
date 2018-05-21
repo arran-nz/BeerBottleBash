@@ -24,7 +24,7 @@ public class InputController : MonoBehaviour {
 
         JumpPressed = Input.GetButton("Jump");
 
-        if(Input.GetKey(KeyCode.R))
+        if(Input.GetButton("Restart"))
         {
             Application.LoadLevel(index: Application.loadedLevel);
         }

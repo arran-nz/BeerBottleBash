@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SurfaceInfo
 {
-    public bool Solid;
     public Vector3 Normal;
     public float Pitch;
 }
@@ -18,12 +17,11 @@ public class RaycastController : MonoBehaviour {
     public SurfaceInfo GetSurfaceInfo()
     {
         RaycastHit hit;
-        bool surfacePresent = Physics.Raycast(RaycastOrigin.position, transform.up * -1, out hit, RayDistance, GroundLayer);
+        Physics.Raycast(RaycastOrigin.position, transform.up * -1, out hit, RayDistance, GroundLayer);
 
         SurfaceInfo info =
             new SurfaceInfo
             {
-                Solid = surfacePresent,
                 Normal = hit.normal,
                 Pitch = GetSurfacePitch(hit.normal)
             };

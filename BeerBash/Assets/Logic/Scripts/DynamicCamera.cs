@@ -48,7 +48,7 @@ public class DynamicCamera : MonoBehaviour
 
 
         Vector3 playerVel = player.gameObject.GetComponent<Rigidbody>().velocity;
-        playerVel = Vector3.ClampMagnitude(playerVel, .5f);
+        playerVel = Vector3.ClampMagnitude(playerVel, 0);
 
         Quaternion rotationOffset = Quaternion.Euler(rotOffset);
         Vector3 relativePos = (player.transform.position - transform.position) + playerVel;

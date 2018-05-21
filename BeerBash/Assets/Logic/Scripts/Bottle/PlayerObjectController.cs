@@ -12,24 +12,34 @@ public class PlayerObjectController : MonoBehaviour {
     RaycastController raycaster;
     Rigidbody rb;
 
-    UprightMovement uprightMovement = new UprightMovement();
-    AirMovement airMovement = new AirMovement();
-    Boost boost = new Boost();
-    Jump jump = new Jump();
+    UprightMovement uprightMovement;
+    AirMovement airMovement;
+    Jump jump;
+    Boost boost;
 
     [SerializeField]
     EmissionController boostParticle;
 
-    public bool Grounded => GetComponent<CollisionManager>().Grounded;
+    public bool Grounded { get; private set; }
     public bool Upright { get; private set; }
 
 
     [SerializeField]
-    private float MaxUprightPitch = 45f;
+    float maxUprightPitch = 45f;
 
-    
-	// Use this for initialization
-	void Start () {
+    [SerializeField]
+    BottleMovementConfiguration currentMovementConfig;
+
+
+
+    // Use this for initialization
+    void Start () {
+
+        boost = new Boost(currentMovementConfig);
+        jump = new Jump(currentMovementConfig);
+        uprightMovement = new UprightMovement(currentMovementConfig);
+        airMovement = new AirMovement(currentMovementConfig);
+
         raycaster = GetComponent<RaycastController>();
         rb = GetComponent<Rigidbody>();
 
@@ -40,11 +50,13 @@ public class PlayerObjectController : MonoBehaviour {
 	void FixedUpdate () {
 
         SurfaceInfo surfaceInfo = raycaster.GetSurfaceInfo();
-        //Grounded = surfaceInfo.Solid;
-        Upright = surfaceInfo.Pitch <= MaxUprightPitch;
+        //Grounded = surfaceInfo.IsGround;
+        Upright = surfaceInfo.Pitch <= maxUprightPitch;
 
         Movement(Upright, surfaceInfo);
-        InputJump(Grounded);
+
+        InputJump(Upright);
+
         InputBoost();
 
 	}
@@ -61,9 +73,9 @@ public class PlayerObjectController : MonoBehaviour {
         }
     }
 
-    void InputJump(bool grounded)
+    void InputJump(bool canJump)
     {
-        if (grounded && input.JumpPressed)
+        if (canJump && input.JumpPressed)
         {
             jump.ApplyJump(rb);
         }

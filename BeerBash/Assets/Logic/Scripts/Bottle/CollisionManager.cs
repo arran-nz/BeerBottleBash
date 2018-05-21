@@ -6,26 +6,15 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour {
 
     public GameObject GroundEffect;
-    public bool Grounded { get; private set; }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (IsGround(collision))
         {
-            Grounded = true;
-
             if (collision.relativeVelocity.y > 10)
             {
                 ImpactEffect(collision.contacts[0]);
             }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (IsGround(collision))
-        {
-            Grounded = false;
         }
     }
 

@@ -1,3 +1,7 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "com.unity.probuilder": "3.0.8",
+    "com.unity.purchasing": "exclude",
+    "com.unity.ads": "exclude"
+  }
 }

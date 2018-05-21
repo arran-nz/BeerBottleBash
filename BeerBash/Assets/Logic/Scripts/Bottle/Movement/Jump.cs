@@ -6,7 +6,14 @@ namespace Bottle.MovementTypes
 {
     public class Jump
     {
-        const float JumpHeight = 5f;
+        readonly BottleMovementConfiguration settings;
+
+        float JumpHeight => settings.JumpHeight;
+
+        public Jump(BottleMovementConfiguration settings)
+        {
+            this.settings = settings;
+        }
 
         public void ApplyJump(Rigidbody rb)
         {
