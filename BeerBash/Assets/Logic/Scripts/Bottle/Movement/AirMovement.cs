@@ -34,7 +34,7 @@ namespace Bottle.MovementTypes
 
         void Yaw(Rigidbody rb, InputController input)
         {
-            // TODO: have option to always face forward towards sky
+
 
             float yaw = input.MovementDirection.x * Time.fixedDeltaTime * YawSpeed;
 
@@ -43,10 +43,13 @@ namespace Bottle.MovementTypes
             rb.AddRelativeTorque(y_angle * yaw);
         }
 
+        void AutoYaw(Rigidbody rb)
+        {
+            // TODO: have option to always face forward towards up
+        }
+
         void PitchRoll(Rigidbody rb, InputController input)
         {
-
-
             float pitch = input.MovementDirection.z * Time.fixedDeltaTime * PitchSpeed;
             float roll = input.MovementDirection.x * Time.fixedDeltaTime * RollSpeed;
 
@@ -59,6 +62,7 @@ namespace Bottle.MovementTypes
 
         private void Flipping(Rigidbody rb, InputController input)
         {
+
             if (input.FlipPressed)
             {
                 Yaw(rb, input);
@@ -67,6 +71,8 @@ namespace Bottle.MovementTypes
             {
                 PitchRoll(rb, input);
             }
+
+
 
             rb.maxAngularVelocity = MaxAngularVelocity;
 

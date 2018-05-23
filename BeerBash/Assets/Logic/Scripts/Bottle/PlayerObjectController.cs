@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Bottle.MovementTypes;
+using Bottle.PhysicalProperties;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(RaycastController))]
@@ -16,6 +17,11 @@ public class PlayerObjectController : MonoBehaviour {
     AirMovement airMovement;
     Jump jump;
     Boost boost;
+
+    Friction friction = new Friction();
+
+   ObjectScan<CollideExplode> enemyScanner = new ObjectScan<CollideExplode>();
+   public LayerMask EnemyMask;
 
     [SerializeField]
     EmissionController boostParticle;
@@ -34,7 +40,7 @@ public class PlayerObjectController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        
         boost = new Boost(currentMovementConfig);
         jump = new Jump(currentMovementConfig);
         uprightMovement = new UprightMovement(currentMovementConfig);
@@ -48,7 +54,6 @@ public class PlayerObjectController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
         SurfaceInfo surfaceInfo = raycaster.GetSurfaceInfo(GetComponent<CapsuleCollider>());
 
         Upright = surfaceInfo.Pitch <= maxUprightPitch && surfaceInfo.RaycastOriginResult;
@@ -61,7 +66,23 @@ public class PlayerObjectController : MonoBehaviour {
         InputBoost();
 
 
+
+
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CollideExplode x = enemyScanner.GetClosestObject(transform.position, 10f, EnemyMask);
+            if(x != null)
+            {
+                x.Explode();
+            }
+        }
+    }
+
+
 
     void Movement(bool Upright, SurfaceInfo surfaceInfo)
     {
@@ -69,11 +90,23 @@ public class PlayerObjectController : MonoBehaviour {
         {
             rb.freezeRotation = true;
             uprightMovement.ApplyMovementForces(rb, input, surfaceInfo);
+            friction.ApplyFriction(2f, rb);
         }
         else
         {
             rb.freezeRotation = false;
-            airMovement.ApplyMovementForces(rb, input);
+
+            if (Grounded)
+            {
+
+                airMovement.ApplyMovementForces(rb, input);
+                friction.ApplyFriction(1f, rb);
+            }
+            else
+            {
+                airMovement.ApplyMovementForces(rb, input);
+            }
+
         }
     }
 
@@ -81,7 +114,6 @@ public class PlayerObjectController : MonoBehaviour {
     {
         if (canJump && input.JumpPressed)
         {
-
             jump.ApplyJump(rb, Vector3.up);
         }
     }

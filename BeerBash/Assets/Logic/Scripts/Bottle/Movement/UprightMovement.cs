@@ -33,8 +33,6 @@ namespace Bottle.MovementTypes
             appliedForce += CalculateInputForce(rb, input, surfaceInfo.Normal);
             KeepUpright(rb, input, surfaceInfo.Normal);
 
-            appliedForce += CalculateGroundFriction(rb.velocity);
-
             rb.AddForce(appliedForce, ForceMode.Acceleration);
         }
 
@@ -80,13 +78,6 @@ namespace Bottle.MovementTypes
             Debug.DrawRay(rb.position, desiredForward);
             Debug.DrawRay(rb.position, uprightDirection, Color.green);
 
-        }
-
-        Vector3 CalculateGroundFriction(Vector3 velocity)
-        {
-            Vector3 inverseVelocity = velocity * -1;
-            Vector3 friction = inverseVelocity * 2f;
-            return friction;
         }
 
         #endregion

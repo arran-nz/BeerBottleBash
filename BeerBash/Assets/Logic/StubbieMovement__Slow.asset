@@ -13,13 +13,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoostAcceleration: 50
   JumpHeight: 5
-  MaxAirVelocity: 20
+  MaxAirVelocity: 30
   AirAcceleration: 10
-  YawSpeed: 300
-  RollSpeed: 350
-  PitchSpeed: 350
+  YawSpeed: 200
+  RollSpeed: 200
+  PitchSpeed: 250
   AirMaxAngularVelocity: 5.5
-  AirAngularDampening: 4
+  AirAngularDampening: 5
   MaxUprightVelocity: 20
   UprightAcceleration: 60
   TurningSpeed: 200
