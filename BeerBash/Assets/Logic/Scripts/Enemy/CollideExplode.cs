@@ -13,7 +13,7 @@ public class CollideExplode : MonoBehaviour {
             GetComponent<Collider>().isTrigger = true;
 
                        
-            collision.collider.GetComponent<Rigidbody>().AddExplosionForce(70f, transform.position, 1f, 0.3f, ForceMode.Impulse);
+            //collision.collider.GetComponent<Rigidbody>().AddExplosionForce(0f, transform.position, 1f, 0.3f, ForceMode.Impulse);
 
             Explode();
 

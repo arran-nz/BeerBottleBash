@@ -88,17 +88,16 @@ public class PlayerObjectController : MonoBehaviour {
     {
         if (Upright)
         {
-            rb.freezeRotation = true;
+            //rb.freezeRotation = true;
             uprightMovement.ApplyMovementForces(rb, input, surfaceInfo);
             friction.ApplyFriction(2f, rb);
         }
         else
         {
-            rb.freezeRotation = false;
+            //rb.freezeRotation = false;
 
             if (Grounded)
             {
-
                 airMovement.ApplyMovementForces(rb, input);
                 friction.ApplyFriction(1f, rb);
             }

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class ObjectScan<T>{
 
-    GameObject targetIdentifier;
-
-
-
+   
     public T GetClosestObject(Vector3 scanPosition, float radius, LayerMask layerMask)
     {
         GameObject[] objects = GetObjects(scanPosition, radius, layerMask);
